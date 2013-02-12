@@ -1,7 +1,7 @@
 var uid;
-$('#login').bind('pageinit', function(event) {
-    alert("dd");
-});
+$(document).on('pageinit', '#login',  function(){
+        alert("something");
+    });
 
 
 
