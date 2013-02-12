@@ -1,6 +1,134 @@
 var uid;
-$('#login').bind('pageinit', function(event) {
-    alert("dd");
+$('#employeeListPage').bind('pageinit', function(event) {
+    if(window.localStorage["username"] != undefined && window.localStorage["userid"] != undefined){
+    
+    	var d = new Date();
+		uid = "" + window.localStorage["userid"] + d.getFullYear() + d.getMonth() + d.getDate();
+        $.mobile.changePage( "#home", {
+            transition: "slide",
+            changeHash: true
+        });
+    }
+
+    $("#btnLogin").click(function() {
+        var username = $("#txtUserName").val().trim(); 
+        var password = $("#txtPassword").val().trim();
+        if(username == "" || password == ""){
+            alert("Please Fill The Details Completely");
+            return false;	
+        }
+        $.mobile.showPageLoadingMsg();
+        $.ajax({
+            type: "POST",
+            url: url + "?op=do_login",
+            data: {
+                'username':username,
+                'password':password
+            },
+            cache: true,
+            dataType: "json",
+            success: onSuccess,
+            error: onerror
+        });
+        return false;
+    });   
+   
+    $("#btnAttendance").click(function() {
+        $.mobile.showPageLoadingMsg();
+
+        if(window.localStorage["attendance-"+uid] != undefined){
+            data = JSON.parse(window.localStorage["attendance-"+uid]);
+            showAttendance(data);
+            return false;
+        }
+        $.ajax({
+            type: "POST",
+            url: url + "?op=show_attendance",
+            data: {
+                'studentid' : window.localStorage["studentid"]
+            },
+            cache: true,
+            dataType: "json",
+            success: showAttendance,
+            error: onerror
+        });		
+    });
+    $("#btnResults").click(function() {
+        $.mobile.showPageLoadingMsg();
+		
+        if(window.localStorage["results-"+uid] != undefined){
+            data = JSON.parse(window.localStorage["results-"+uid]);
+            showResults(data);
+            return false;
+        }
+		
+        $.ajax({
+            type: "POST",
+            url: url + "?op=show_results",
+            data: {
+                'studentid' : window.localStorage["studentid"]
+            },
+            cache: true,
+            dataType: "json",
+            success: showResults,
+            error: onerror
+        });		
+    });
+	
+    $("#btnAnnouncements").click(function() {
+        $.mobile.showPageLoadingMsg();
+        if(window.localStorage["announcements-"+uid] != undefined){
+            data = JSON.parse(window.localStorage["announcements-"+uid]);
+            showAnnouncements(data);
+            return false;
+        }
+        $.ajax({
+            type: "POST",
+            url: url + "?op=show_announcements",
+            data: {	},
+            cache: true,
+            dataType: "json",
+            success: showAnnouncements,
+            error: onerror
+        });		
+    });
+	
+    $("#btnProfile").click(function() {
+	
+        $.mobile.showPageLoadingMsg();
+        if(window.localStorage["profile"] != undefined){
+            data = JSON.parse(window.localStorage["profile"]);
+            showProfile(data);
+            return false;
+        }
+        $.ajax({
+            type: "POST",
+            url: url + "?op=show_profile",
+            data: {
+                'userid':window.localStorage["userid"]
+            },
+            cache: true,
+            dataType: "json",
+            success: showProfile,
+            error: onerror
+        });		
+    });
+	
+    $("#btnExit").click(function() {
+        localStorage.removeItem("username");
+        localStorage.removeItem("userid");
+        localStorage.removeItem("profile");        
+        $.mobile.changePage( "#login", {
+            transition: "slide",
+            changeHash: true
+        });
+    });
+	
+    $("#btnReset").click(function() {
+        $("#txtUserName").val("");
+        $("#txtPassword").val("");
+    });
+
 });
 
 
