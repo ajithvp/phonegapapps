@@ -1,6 +1,6 @@
 var uid;
-$('#login').live('pageinit', function(event) {
-    alert("dd");
+$(document).on('pageinit', '#login',  function(){
+        alert("something");
 });
 
 

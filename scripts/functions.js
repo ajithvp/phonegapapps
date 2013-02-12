@@ -1,7 +1,30 @@
 var uid;
 $(document).on('pageinit', '#login',  function(){
-        alert("something");
+    alert("something");
+        
+	$("#btnLogin").click(function() {
+        var username = $("#txtUserName").val().trim(); 
+        var password = $("#txtPassword").val().trim();
+        if(username == "" || password == ""){
+            alert("Please Fill The Details Completely");
+            return false;	
+        }
+        $.mobile.showPageLoadingMsg();
+        $.ajax({
+            type: "POST",
+            url: url + "?op=do_login",
+            data: {
+                'username':username,
+                'password':password
+            },
+            cache: true,
+            dataType: "json",
+            success: onSuccess,
+            error: onerror
+        });
+        return false;
     });
+});
 
 
 
