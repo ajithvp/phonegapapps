@@ -494,7 +494,7 @@ function onSuccess(data){
         window.localStorage["studentid"] = data.id;
         var d = new Date();
 		uid = "" + window.localStorage["userid"] + d.getFullYear() + d.getMonth() + d.getDate();
-        $.mobile.changePage( "home.html", {
+        $.mobile.changePage( "index.html", {
             transition: "slide",
             reverse: false,
             changeHash: false
