@@ -57,7 +57,7 @@ $(document).on('pageinit', '#home',  function(){
 
 
 $(document).on('pageshow', '#home',  function(){
-
+alert("pageshow")
     $("#btnAttendance").click(function() {
         $.mobile.showPageLoadingMsg();
         $.mobile.changePage( "attendance.html", {
