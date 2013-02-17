@@ -27,14 +27,7 @@ $(document).on('pageinit', '#login',  function(){
         return false;
     });
 
-    $("#btnAttendance").click(function() {
-        $.mobile.showPageLoadingMsg();
-
-        $.mobile.changePage( "attendance.html", {
-        	transition: "slide",
-        	changeHash: true
-    	});
-    });
+    
     
     if(window.localStorage["username"] != undefined && window.localStorage["userid"] != undefined){
     
@@ -47,6 +40,23 @@ $(document).on('pageinit', '#login',  function(){
     }
     
 });
+
+$(document).on('pageshow', '#home',  function(){
+    alert("home.html loading");
+    
+    $("#btnAttendance").click(function() {
+    	alert("clicked");
+        $.mobile.showPageLoadingMsg();
+
+        $.mobile.changePage( "attendance.html", {
+        	transition: "slide",
+        	changeHash: true
+    	});
+    });
+    
+});
+
+
 
 
 
