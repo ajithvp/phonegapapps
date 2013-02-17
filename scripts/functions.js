@@ -44,6 +44,12 @@ $(document).on('pageinit', '#login',  function(){
 $(document).on('pageshow', '#login',  function(){
 	alert("login pageshow");
 });
+$(document).on('pagebeforeshow', '#login',  function(){
+	alert("login pageshow");
+});
+$(document).on('pagebeforeshow', '#login',  function(){
+	alert("login pagebeforeshow");
+});
 
 
 $(document).on('pageshow', '#home',  function(){
