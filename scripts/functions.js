@@ -45,9 +45,6 @@ $(document).on('pageshow', '#login',  function(){
 	alert("login pageshow");
 });
 $(document).on('pagebeforeshow', '#login',  function(){
-	alert("login pageshow");
-});
-$(document).on('pagebeforeshow', '#login',  function(){
 	alert("login pagebeforeshow");
 });
 
