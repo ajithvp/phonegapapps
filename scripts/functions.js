@@ -1,6 +1,8 @@
 var uid;
 $(document).on('pageinit', '#login',  function(){
     alert("something");
+    
+    
         
 	$("#btnLogin").click(function() {
         var username = $("#txtUserName").val().trim(); 
@@ -24,6 +26,26 @@ $(document).on('pageinit', '#login',  function(){
         });
         return false;
     });
+
+    $("#btnAttendance").click(function() {
+        $.mobile.showPageLoadingMsg();
+
+        $.mobile.changePage( "attendance.html", {
+        	transition: "slide",
+        	changeHash: true
+    	});
+    });
+    
+    if(window.localStorage["username"] != undefined && window.localStorage["userid"] != undefined){
+    
+    	var d = new Date();
+		uid = "" + window.localStorage["userid"] + d.getFullYear() + d.getMonth() + d.getDate();
+        $.mobile.changePage( "home.html", {
+            transition: "slide",
+            changeHash: true
+        });
+    }
+    
 });
 
 
