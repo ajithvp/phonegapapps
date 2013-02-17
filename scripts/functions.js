@@ -42,17 +42,7 @@ $(document).on('pageinit', '#login',  function(){
 });
 
 
-$(document).on('pagebeforeshow', '#login',  function(){
-	if(window.localStorage["username"] != undefined && window.localStorage["userid"] != undefined){
-    
-    	var d = new Date();
-		uid = "" + window.localStorage["userid"] + d.getFullYear() + d.getMonth() + d.getDate();
-        $.mobile.changePage( "home.html", {
-            transition: "slide",
-            changeHash: true
-        });
-    }
-});
+
 
 
 $(document).on('pageshow', '#home',  function(){
@@ -62,7 +52,7 @@ $(document).on('pageshow', '#home',  function(){
         $.mobile.showPageLoadingMsg();
         $.mobile.changePage( "attendance.html", {
         	transition: "slide",
-        	changeHash: true
+        	changeHash: false
     	});
     });
     
@@ -70,7 +60,7 @@ $(document).on('pageshow', '#home',  function(){
         $.mobile.showPageLoadingMsg();
     	$.mobile.changePage( "results.html", {
         	transition: "slide",
-        	changeHash: true
+        	changeHash: false
     	});
     });
     $("#btnAnnouncements").click(function() {
