@@ -41,11 +41,17 @@ $(document).on('pageinit', '#login',  function(){
     
 });
 
-$(document).on('pageshow', '#login',  function(){
-	alert("login pageshow");
-});
+
 $(document).on('pagebeforeshow', '#login',  function(){
-	alert("login pagebeforeshow");
+	if(window.localStorage["username"] != undefined && window.localStorage["userid"] != undefined){
+    
+    	var d = new Date();
+		uid = "" + window.localStorage["userid"] + d.getFullYear() + d.getMonth() + d.getDate();
+        $.mobile.changePage( "home.html", {
+            transition: "slide",
+            changeHash: true
+        });
+    }
 });
 
 
