@@ -45,10 +45,37 @@ $(document).on('pageshow', '#home',  function(){
     alert("home.html loading");
     
     $("#btnAttendance").click(function() {
-    	alert("clicked");
         $.mobile.showPageLoadingMsg();
-
         $.mobile.changePage( "attendance.html", {
+        	transition: "slide",
+        	changeHash: true
+    	});
+    });
+    
+    $("#btnResults").click(function() {
+        $.mobile.showPageLoadingMsg();
+    	$.mobile.changePage( "results.html", {
+        	transition: "slide",
+        	changeHash: true
+    	});
+    });
+    $("#btnAnnouncements").click(function() {
+        $.mobile.showPageLoadingMsg();
+    	$.mobile.changePage( "announcements.html", {
+        	transition: "slide",
+        	changeHash: true
+    	});
+    });
+    $("#btnProfile").click(function() {
+        $.mobile.showPageLoadingMsg();
+    	$.mobile.changePage( "profile.html", {
+        	transition: "slide",
+        	changeHash: true
+    	});
+    });
+    $("#btnExit").click(function() {
+        $.mobile.showPageLoadingMsg();
+    	$.mobile.changePage( "profile.html", {
         	transition: "slide",
         	changeHash: true
     	});
