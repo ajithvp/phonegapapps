@@ -56,6 +56,58 @@ $(document).on('pageinit', '#home',  function(){
 });
 
 
+$(document).on('pageshow', '#home',  function(){
+
+    $("#btnAttendance").click(function() {
+        $.mobile.showPageLoadingMsg();
+        $.mobile.changePage( "attendance.html", {
+        	transition: "slide",
+        	changeHash: true
+    	});
+    });
+    
+    $("#btnResults").click(function() {
+        $.mobile.showPageLoadingMsg();
+    	$.mobile.changePage( "results.html", {
+        	transition: "slide",
+        	changeHash: true
+    	});
+    });
+    $("#btnAnnouncements").click(function() {
+        $.mobile.showPageLoadingMsg();
+    	$.mobile.changePage( "announcements.html", {
+        	transition: "slide",
+        	changeHash: true
+    	});
+    });
+    $("#btnProfile").click(function() {
+        $.mobile.showPageLoadingMsg();
+    	$.mobile.changePage( "profile.html", {
+        	transition: "slide",
+        	changeHash: true
+    	});
+    });
+    $("#btnExit").click(function() {
+        $.mobile.showPageLoadingMsg();
+    	$.mobile.changePage( "profile.html", {
+        	transition: "slide",
+        	changeHash: true
+    	});
+    });    
+    
+    if(window.localStorage["username"] == undefined || window.localStorage["userid"] == undefined){
+    
+    	var d = new Date();
+		uid = "" + window.localStorage["userid"] + d.getFullYear() + d.getMonth() + d.getDate();
+        $.mobile.changePage( "login.html", {
+            transition: "slide",
+            reverse: false,
+        	changeHash: false
+        });
+    }
+    
+});
+
 
 
 
