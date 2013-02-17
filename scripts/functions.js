@@ -1,58 +1,11 @@
 var uid;
-$(document).on('pageinit', '#login',  function(){
-    alert("something");
-    
-    
-        
-	$("#btnLogin").click(function() {
-        var username = $("#txtUserName").val().trim(); 
-        var password = $("#txtPassword").val().trim();
-        if(username == "" || password == ""){
-            alert("Please Fill The Details Completely");
-            return false;	
-        }
-        $.mobile.showPageLoadingMsg();
-        $.ajax({
-            type: "POST",
-            url: url + "?op=do_login",
-            data: {
-                'username':username,
-                'password':password
-            },
-            cache: true,
-            dataType: "json",
-            success: onSuccess,
-            error: onerror
-        });
-        return false;
-    });
+$(document).on('pageinit', '#home',  function(){
 
-    
-    
-    if(window.localStorage["username"] != undefined && window.localStorage["userid"] != undefined){
-    
-    	var d = new Date();
-		uid = "" + window.localStorage["userid"] + d.getFullYear() + d.getMonth() + d.getDate();
-        $.mobile.changePage( "home.html", {
-            transition: "slide",
-            changeHash: true
-        });
-    }
-    
-});
-
-
-
-
-
-$(document).on('pageshow', '#home',  function(){
-    alert("home.html loading");
-    
     $("#btnAttendance").click(function() {
         $.mobile.showPageLoadingMsg();
         $.mobile.changePage( "attendance.html", {
         	transition: "slide",
-        	changeHash: false
+        	changeHash: true
     	});
     });
     
@@ -60,7 +13,7 @@ $(document).on('pageshow', '#home',  function(){
         $.mobile.showPageLoadingMsg();
     	$.mobile.changePage( "results.html", {
         	transition: "slide",
-        	changeHash: false
+        	changeHash: true
     	});
     });
     $("#btnAnnouncements").click(function() {
@@ -84,6 +37,54 @@ $(document).on('pageshow', '#home',  function(){
         	changeHash: true
     	});
     });
+    
+        
+	
+    
+    
+    if(window.localStorage["username"] == undefined || window.localStorage["userid"] == undefined){
+    
+    	var d = new Date();
+		uid = "" + window.localStorage["userid"] + d.getFullYear() + d.getMonth() + d.getDate();
+        $.mobile.changePage( "login.html", {
+            transition: "slide",
+            reverse: false,
+        	changeHash: false
+        });
+    }
+    
+});
+
+
+
+
+
+$(document).on('pageshow', '#login',  function(){
+
+    $("#btnLogin").click(function() {
+        var username = $("#txtUserName").val().trim(); 
+        var password = $("#txtPassword").val().trim();
+        if(username == "" || password == ""){
+            alert("Please Fill The Details Completely");
+            return false;	
+        }
+        $.mobile.showPageLoadingMsg();
+        $.ajax({
+            type: "POST",
+            url: url + "?op=do_login",
+            data: {
+                'username':username,
+                'password':password
+            },
+            cache: true,
+            dataType: "json",
+            success: onSuccess,
+            error: onerror
+        });
+        return false;
+    });
+
+    
     
 });
 
