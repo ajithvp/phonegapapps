@@ -31,12 +31,18 @@ $(document).on('pageinit', '#home',  function(){
     });
     $("#btnExit").live("click",function() {
         $.mobile.showPageLoadingMsg();
-        $.mobile.changePage( "profile.html", {
+        localStorage.removeItem("username");
+        localStorage.removeItem("userid");
+        localStorage.removeItem("profile");   
+        $.mobile.changePage( "login.html", {
             transition: "slide",
             changeHash: true
         });
     }); 
-    
+    $("#btnReset").live("click", function() {
+        $("#txtUserName").val("");
+        $("#txtPassword").val("");
+    });
     if(window.localStorage["username"] == undefined || window.localStorage["userid"] == undefined){
         var d = new Date();
         uid = "" + window.localStorage["userid"] + d.getFullYear() + d.getMonth() + d.getDate();
@@ -85,8 +91,8 @@ $(document).on('pageshow', '#login',  function(){
     });    
 });
 
+
 $(document).on('pagebeforeshow', '#profile',  function(){
-alert("d");
     $.mobile.showPageLoadingMsg();
     if(window.localStorage["profile"] != undefined){
         data = JSON.parse(window.localStorage["profile"]);
@@ -104,6 +110,67 @@ alert("d");
         success: showProfile,
         error: onerror
     });		
+});
+
+$(document).on('pagebeforeshow', '#announcements',  function(){
+    $.mobile.showPageLoadingMsg();
+        if(window.localStorage["announcements-"+uid] != undefined){
+            data = JSON.parse(window.localStorage["announcements-"+uid]);
+            showAnnouncements(data);
+            return false;
+        }
+        $.ajax({
+            type: "POST",
+            url: url + "?op=show_announcements",
+            data: {	},
+            cache: true,
+            dataType: "json",
+            success: showAnnouncements,
+            error: onerror
+        });		
+});
+
+$(document).on('pagebeforeshow', '#results',  function(){
+    $.mobile.showPageLoadingMsg();
+		
+        if(window.localStorage["results-"+uid] != undefined){
+            data = JSON.parse(window.localStorage["results-"+uid]);
+            showResults(data);
+            return false;
+        }
+		
+        $.ajax({
+            type: "POST",
+            url: url + "?op=show_results",
+            data: {
+                'studentid' : window.localStorage["studentid"]
+            },
+            cache: true,
+            dataType: "json",
+            success: showResults,
+            error: onerror
+        });		
+});
+
+$(document).on('pagebeforeshow', '#attendance',  function(){
+    $.mobile.showPageLoadingMsg();
+		
+        if(window.localStorage["attendance-"+uid] != undefined){
+            data = JSON.parse(window.localStorage["attendance-"+uid]);
+            showAttendance(data);
+            return false;
+        }
+        $.ajax({
+            type: "POST",
+            url: url + "?op=show_attendance",
+            data: {
+                'studentid' : window.localStorage["studentid"]
+            },
+            cache: true,
+            dataType: "json",
+            success: showAttendance,
+            error: onerror
+        });		
 });
 
 var url = "http://www.topperseducation.com/webservices/ajax.php";
