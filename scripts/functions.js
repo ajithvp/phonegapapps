@@ -439,7 +439,7 @@ function getUrlVars() {
     return vars;
 }
 function showAttendanceDetails(data){
-
+	alert("ddd");
     if(window.localStorage["attendanceid-"+uid+"-"+data.id] == undefined){
         window.localStorage["attendanceid-"+uid+"-"+data.id] = JSON.stringify(data);
     }
