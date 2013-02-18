@@ -436,11 +436,9 @@ function getUrlVars() {
     return vars;
 }
 function showAttendanceDetails(data){
-	alert("ddd");
     if(window.localStorage["attendanceid-"+uid+"-"+data.id] == undefined){
         window.localStorage["attendanceid-"+uid+"-"+data.id] = JSON.stringify(data);
     }
-    alert(JSON.stringify(data));
     var html = ''; 
     html += '<ul class="ui-listview ui-listview-inset ui-corner-all ">';
     html += '<li class="ui-li ui-li-divider ui-btn ui-bar-a ui-corner-top">' + data.Date + '</li>';
