@@ -95,26 +95,23 @@ $(document).on('pageshow', '#login',  function(){
 $(document).on('pagebeforeshow', '#attendanceDetails',  function(){
     $.mobile.showPageLoadingMsg();
     var attendanceid = getUrlVars()["id"];
-    $(this).click(function(){
-            $.mobile.showPageLoadingMsg();
-            if(window.localStorage["attendanceid-"+uid+"-"+attendanceid] != undefined){
-                data = JSON.parse(window.localStorage["attendanceid-"+uid+"-"+attendanceid]);
-                showAttendanceDetails(data);
-                return false;
-            }
-            $.ajax({
-                type: "POST",
-                url: url + "?op=show_attendance_details",
-                data: {
-                    'attendanceid':attendanceid
-                },
-                cache: true,
-                dataType: "json",
-                success: showAttendanceDetails,
-                error: onerror
-            });		
-		
-        });
+    $.mobile.showPageLoadingMsg();
+    if(window.localStorage["attendanceid-"+uid+"-"+attendanceid] != undefined){
+    	data = JSON.parse(window.localStorage["attendanceid-"+uid+"-"+attendanceid]);
+        showAttendanceDetails(data);
+        return false;
+    }
+    $.ajax({
+    	type: "POST",
+        url: url + "?op=show_attendance_details",
+        data: {
+       		'attendanceid':attendanceid
+            },
+        cache: true,
+    	dataType: "json",
+        success: showAttendanceDetails,
+        error: onerror
+   	});		
 });
 
 
