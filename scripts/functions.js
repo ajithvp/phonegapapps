@@ -85,7 +85,26 @@ $(document).on('pageshow', '#login',  function(){
     });    
 });
 
-
+$(document).on('pageshow', '#profile',  function(){
+alert("d");
+    $.mobile.showPageLoadingMsg();
+    if(window.localStorage["profile"] != undefined){
+        data = JSON.parse(window.localStorage["profile"]);
+        showProfile(data);
+        return false;
+    }
+    $.ajax({
+        type: "POST",
+        url: url + "?op=show_profile",
+        data: {
+            'userid':window.localStorage["userid"]
+        },
+        cache: true,
+        dataType: "json",
+        success: showProfile,
+        error: onerror
+    });		
+});
 
 var url = "http://www.topperseducation.com/webservices/ajax.php";
 var heading = '<div style="width:100%; height:54px; background:url(images/icon.png) no-repeat; padding-left:60px;">';
