@@ -1,7 +1,7 @@
 var uid;
 $(document).on('pageinit', '#home',  function(){
 
-    $("#btnAttendance").click(function() {
+    $("#btnAttendance").live("click",function() {
         $.mobile.showPageLoadingMsg();
         $.mobile.changePage( "attendance.html", {
         	transition: "slide",
@@ -58,13 +58,7 @@ $(document).on('pageinit', '#home',  function(){
 
 $(document).on('pageshow', '#home',  function(){
 alert("pageshow")
-    $("#btnAttendance").click(function() {
-        $.mobile.showPageLoadingMsg();
-        $.mobile.changePage( "attendance.html", {
-        	transition: "slide",
-        	changeHash: true
-    	});
-    });
+    
     
     $("#btnResults").click(function() {
         $.mobile.showPageLoadingMsg();
