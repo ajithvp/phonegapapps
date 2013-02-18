@@ -7,43 +7,37 @@ $(document).on('pageinit', '#home',  function(){
         	transition: "slide",
         	changeHash: true
     	});
-    });
-    
-    $("#btnResults").click(function() {
+    });    
+    $("#btnResults").live("click",function() {
         $.mobile.showPageLoadingMsg();
     	$.mobile.changePage( "results.html", {
         	transition: "slide",
         	changeHash: true
     	});
     });
-    $("#btnAnnouncements").click(function() {
+    $("#btnAnnouncements")live("click",function() {
         $.mobile.showPageLoadingMsg();
     	$.mobile.changePage( "announcements.html", {
         	transition: "slide",
         	changeHash: true
     	});
     });
-    $("#btnProfile").click(function() {
+    $("#btnProfile").live("click",function() {
         $.mobile.showPageLoadingMsg();
     	$.mobile.changePage( "profile.html", {
         	transition: "slide",
         	changeHash: true
     	});
     });
-    $("#btnExit").click(function() {
+    $("#btnExit").live("click",function() {
         $.mobile.showPageLoadingMsg();
     	$.mobile.changePage( "profile.html", {
         	transition: "slide",
         	changeHash: true
     	});
-    });
-    
-        
-	
-    
+    }); 
     
     if(window.localStorage["username"] == undefined || window.localStorage["userid"] == undefined){
-    
     	var d = new Date();
 		uid = "" + window.localStorage["userid"] + d.getFullYear() + d.getMonth() + d.getDate();
         $.mobile.changePage( "login.html", {
@@ -51,46 +45,11 @@ $(document).on('pageinit', '#home',  function(){
             reverse: false,
         	changeHash: false
         });
-    }
-    
+    }  
 });
-
 
 $(document).on('pageshow', '#home',  function(){
-alert("pageshow")
-    
-    
-    $("#btnResults").click(function() {
-        $.mobile.showPageLoadingMsg();
-    	$.mobile.changePage( "results.html", {
-        	transition: "slide",
-        	changeHash: true
-    	});
-    });
-    $("#btnAnnouncements").click(function() {
-        $.mobile.showPageLoadingMsg();
-    	$.mobile.changePage( "announcements.html", {
-        	transition: "slide",
-        	changeHash: true
-    	});
-    });
-    $("#btnProfile").click(function() {
-        $.mobile.showPageLoadingMsg();
-    	$.mobile.changePage( "profile.html", {
-        	transition: "slide",
-        	changeHash: true
-    	});
-    });
-    $("#btnExit").click(function() {
-        $.mobile.showPageLoadingMsg();
-    	$.mobile.changePage( "profile.html", {
-        	transition: "slide",
-        	changeHash: true
-    	});
-    });    
-    
-    if(window.localStorage["username"] == undefined || window.localStorage["userid"] == undefined){
-    
+    if(window.localStorage["username"] == undefined || window.localStorage["userid"] == undefined){    
     	var d = new Date();
 		uid = "" + window.localStorage["userid"] + d.getFullYear() + d.getMonth() + d.getDate();
         $.mobile.changePage( "login.html", {
@@ -99,14 +58,9 @@ alert("pageshow")
         	changeHash: false
         });
     }
-    
 });
 
-
-
-
 $(document).on('pageshow', '#login',  function(){
-
     $("#btnLogin").click(function() {
         var username = $("#txtUserName").val().trim(); 
         var password = $("#txtPassword").val().trim();
@@ -128,15 +82,29 @@ $(document).on('pageshow', '#login',  function(){
             error: onerror
         });
         return false;
-    });
-
-    
-    
+    });    
 });
 
+$(document).on('pageshow', '#profile',  function(){
 
-
-
+	$.mobile.showPageLoadingMsg();
+    if(window.localStorage["profile"] != undefined){
+    	data = JSON.parse(window.localStorage["profile"]);
+    	showProfile(data);
+        return false;
+    }
+    $.ajax({
+        type: "POST",
+        url: url + "?op=show_profile",
+        data: {
+        	'userid':window.localStorage["userid"]
+        	},
+        cache: true,
+        dataType: "json",
+        success: showProfile,
+        error: onerror
+    });		
+});
 
 var url = "http://www.topperseducation.com/webservices/ajax.php";
 var heading = '<div style="width:100%; height:54px; background:url(images/icon.png) no-repeat; padding-left:60px;">';
@@ -289,10 +257,7 @@ function showProfile(data){
 	html += '</ul>';
 	html = heading + html;
     $('.content',$('#profile')).html(html);
-    $.mobile.changePage( "#profile", {
-        transition: "slide",
-        changeHash: true
-    });
+    
     $.mobile.hidePageLoadingMsg();
 }
 
