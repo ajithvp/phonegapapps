@@ -95,7 +95,6 @@ $(document).on('pageshow', '#login',  function(){
 $(document).on('pagebeforeshow', '#attendanceDetails',  function(){
     $.mobile.showPageLoadingMsg();
     var attendanceid = getUrlVars()["id"];
-    alert(attendanceid);
         $(this).click(function(){
             $.mobile.showPageLoadingMsg();
             if(window.localStorage["attendanceid-"+uid+"-"+attendanceid] != undefined){
