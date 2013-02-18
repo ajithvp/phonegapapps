@@ -95,8 +95,7 @@ $(document).on('pageshow', '#login',  function(){
 $(document).on('pagebeforeshow', '#attendanceDetails',  function(){
     $.mobile.showPageLoadingMsg();
     var attendanceid = getUrlVars()["id"];
-    alert(attendanceid);
-        $(this).click(function(){
+    $(this).click(function(){
             $.mobile.showPageLoadingMsg();
             if(window.localStorage["attendanceid-"+uid+"-"+attendanceid] != undefined){
                 data = JSON.parse(window.localStorage["attendanceid-"+uid+"-"+attendanceid]);
@@ -444,7 +443,7 @@ function showAttendanceDetails(data){
     if(window.localStorage["attendanceid-"+uid+"-"+data.id] == undefined){
         window.localStorage["attendanceid-"+uid+"-"+data.id] = JSON.stringify(data);
     }
-    
+    alert(JSON.stringify(data));
     var html = ''; 
     html += '<ul class="ui-listview ui-listview-inset ui-corner-all ">';
     html += '<li class="ui-li ui-li-divider ui-btn ui-bar-a ui-corner-top">' + data.Date + '</li>';
